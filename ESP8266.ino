@@ -11,16 +11,43 @@ Store store;
 
 void setup() {
   system_init();
-
-
+  config_init();
+  
 
 
 
 }
 
 void loop() {
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void __test_user_config() {
   store.writeProtectUnlock();
-  init_config();
+  config_init();
 
   char *gkd = store.get(FLASH_SSID);
   Serial.println(gkd);
@@ -34,17 +61,9 @@ void loop() {
   char *gkd4 = store.get(FLASH_TCP_PORT);
   Serial.println(pchar2uint16_t(gkd4));
 
-  
 
   delay(2000000);
-
 }
-
-
-
-
-
-
 
 
 void __test_utils_convert() {

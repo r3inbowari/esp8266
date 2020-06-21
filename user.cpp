@@ -8,9 +8,9 @@
 #include "utils.h"
 
 /**
- * 设备初始化
+ * 设备初始化Flash
  */
-void init_config() {
+void config_init() {
   Store s;
   char * port = uint16_t2pchar(DEFAULT_TCP_PORT);
   s.set(FLASH_SSID, DEFAULT_WLAN_SSID);

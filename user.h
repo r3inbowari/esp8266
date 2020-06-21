@@ -16,5 +16,5 @@
 #define DEFAULT_WLAN_SSID "r3inbowari"
 #define DEFAULT_WLAN_PASSWORD "15946395951"
 
-void init_config(); // 新设备初始化
+void config_init(); // 新设备初始化
 #endif
