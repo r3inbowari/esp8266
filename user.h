@@ -11,5 +11,10 @@
 #define FLASH_TCP_HOST 67
 #define FLASH_TCP_PORT 100
 
+#define DEFAULT_TCP_PORT 1008
+#define DEFAULT_TCP_HOST "172.20.10.2"
+#define DEFAULT_WLAN_SSID "r3inbowari"
+#define DEFAULT_WLAN_PASSWORD "15946395951"
+
 void init_config(); // 新设备初始化
 #endif

@@ -14,9 +14,40 @@ void setup() {
 
 
 
+
+
 }
 
 void loop() {
+  store.writeProtectUnlock();
+  init_config();
+
+  char *gkd = store.get(FLASH_SSID);
+  Serial.println(gkd);
+
+  char *gkd2 = store.get(FLASH_PASSWORD);
+  Serial.println(gkd2);
+
+  char *gkd3 = store.get(FLASH_TCP_HOST);
+  Serial.println(gkd3);
+
+  char *gkd4 = store.get(FLASH_TCP_PORT);
+  Serial.println(pchar2uint16_t(gkd4));
+
+  
+
+  delay(2000000);
+
+}
+
+
+
+
+
+
+
+
+void __test_utils_convert() {
   Serial.println("u16 -> pchar");
   uint16_t t = 2333;
   char *a = uint16_t2pchar(t);
@@ -28,17 +59,7 @@ void loop() {
   uint16_t b = pchar2uint16_t(a);
   Serial.println(b);
   delay(2000);
-
 }
-
-
-
-
-
-
-
-
-
 
 
 
