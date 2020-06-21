@@ -7,7 +7,7 @@
 #include "rest.h"
 #include "utils.h"
 #include "system.h"
-
+#include "web.h"
 /**
  * Home
  */
@@ -41,10 +41,10 @@ void handleWlan() {
   if (server.hasArg("ssid") && server.hasArg("password")) {
     String arg0 = server.arg("ssid");
     String arg1 = server.arg("password");
-    writeProtectUnlock();
-    flash_write((char*)arg0.c_str(), FLASH_SSID);
-    flash_write((char*)arg1.c_str(), FLASH_PASSWORD);
-    writeProtectLock();
+    // writeProtectUnlock();
+//    flash_write((char*)arg0.c_str(), FLASH_SSID);
+//    flash_write((char*)arg1.c_str(), FLASH_PASSWORD);
+    // writeProtectLock();
     WiFi.disconnect();
     WiFi.begin(arg0, arg1);
     server.send(200, "text/plain", "wlan params: " + arg0 + ", " + arg1);
@@ -65,26 +65,7 @@ void handleHost() {
     char *a = (char*)arg1.c_str();
 
     
-    uint16_t __port = 0;
-    double j = 0;
-    for (int i = strlen(a) - 1; i >= 0; i--) {
-      __port += (a[i] - '0') * (uint16_t)pow(10, j++);
-    }
-    // 套接字中port的处理方法(uint16_t2char*)
-    char *convertPort = (char*)malloc(2);
-    // 低八位
-    convertPort[0] = __port & 0xFF;
-    // 高八位
-    convertPort[1] = __port >> 8;
-    writeProtectUnlock();
-    flash_write((char*)arg0.c_str(), FLASH_TCP_HOST);
-    flash_write(convertPort, FLASH_TCP_PORT);
-    free(convertPort);
-    writeProtectLock();
-    close_tcp();
-    free(host);
-    load_host_flash();
-    connect_tcp();
+   
     server.send(200, "text/plain", "host params: " + arg0 + ", " + arg1);
   } else {
     server.send(200, "text/plain", "error or less query params.");

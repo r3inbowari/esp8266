@@ -16,5 +16,10 @@
 #define DEFAULT_WLAN_SSID "r3inbowari"
 #define DEFAULT_WLAN_PASSWORD "15946395951"
 
+
+
 void config_init(); // 新设备初始化
+
+char* getWlanPassword();
+char* getWlanSSID();
 #endif

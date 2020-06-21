@@ -6,12 +6,16 @@
 #include "system.h"
 #include "user.h"
 #include "utils.h"
+#include "_esp.h"
+#include "network.h"
 
-Store store;
+//Store store;
 
 void setup() {
   system_init();
   config_init();
+  network_init();
+  
   
 
 

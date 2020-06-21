@@ -6,7 +6,9 @@
 #include "user.h"
 #include "store.h"
 #include "utils.h"
+#include "_esp.h"
 
+Store store;
 /**
  * 设备初始化Flash
  */
@@ -18,4 +20,12 @@ void config_init() {
   s.set(FLASH_TCP_HOST, DEFAULT_TCP_HOST);
   s.set(FLASH_TCP_PORT, port);
   free(port);
+}
+
+char* getWlanPassword() {
+  return store.get(FLASH_PASSWORD);
+}
+
+char* getWlanSSID() {
+  return store.get(FLASH_SSID);
 }

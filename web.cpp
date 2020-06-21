@@ -6,6 +6,9 @@
 
 #include "system.h"
 #include "rest.h"
+#include "web.h"
+
+ESP8266WebServer server(80);
 
 /**
  * web server
