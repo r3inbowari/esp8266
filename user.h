@@ -11,4 +11,5 @@
 #define FLASH_TCP_HOST 67
 #define FLASH_TCP_PORT 100
 
+void init_config(); // 新设备初始化
 #endif

@@ -10,17 +10,14 @@ Store store;
 
 void setup() {
   system_init();
-
+  
 }
 
 void loop() {
   
 }
 
-void system_init() {
-  Serial.begin(9600);
 
-}
 
 
 

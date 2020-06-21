@@ -7,5 +7,9 @@
 #define __ESP_SYSTEM_H
 
 #include <ESP8266WiFi.h>
+#include <ESP8266mDNS.h>
+#include <WiFiClient.h>
+#include <ESP8266WebServer.h>
 
+void system_init();
 #endif
