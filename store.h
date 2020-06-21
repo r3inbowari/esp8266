@@ -6,7 +6,6 @@
 #ifndef __STORE_H
 #define __STORE_H
 
-#include <EEPROM.h>
 #include "system.h"
 
 #define WRITE_PROTECT_ADDR 0x00

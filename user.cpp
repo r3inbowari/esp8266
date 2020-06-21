@@ -9,10 +9,10 @@
 /**
  * 设备初始化
  */
-void init_config() {
-  Store s;
-  s.set(FLASH_SSID, "r3inbowari");
-  s.set(FLASH_PASSWORD, "15946395951");
-  s.set(FLASH_TCP_HOST, "172.20.10.2");
-  s.set(FLASH_TCP_PORT, );
-}
+//void init_config() {
+//  Store s;
+//  s.set(FLASH_SSID, "r3inbowari");
+//  s.set(FLASH_PASSWORD, "15946395951");
+//  s.set(FLASH_TCP_HOST, "172.20.10.2");
+//  s.set(FLASH_TCP_PORT, );
+//}
