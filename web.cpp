@@ -22,3 +22,8 @@ void web_init() {
   server.on("/changeHost", handleHost); // 修改 后台服务器访问地址
   server.begin();
 }
+
+void http_handle() {
+  server.handleClient();
+  MDNS.update();
+}

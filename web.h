@@ -11,4 +11,7 @@
 
 extern ESP8266WebServer server;
 
+void http_handle();
+void web_init();
+
 #endif

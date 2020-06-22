@@ -29,3 +29,35 @@ char* getWlanPassword() {
 char* getWlanSSID() {
   return store.get(FLASH_SSID);
 }
+
+void setWlanPassword(char *src) {
+  store.set(FLASH_PASSWORD, src);
+}
+
+void setWlanSSID(char *src) {
+  store.set(FLASH_SSID, src);
+}
+
+void lock() {
+  store.writeProtectLock();
+}
+
+void unlock() {
+  store.writeProtectUnlock();
+}
+
+char* getHost() {
+  return store.get(FLASH_TCP_HOST);
+}
+
+char *getPort() {
+  return store.get(FLASH_TCP_PORT);
+}
+
+void setHost(char *src) {
+  store.set(FLASH_TCP_HOST, src);
+}
+
+void setPort(char *src) {
+  store.set(FLASH_TCP_PORT, src);
+}

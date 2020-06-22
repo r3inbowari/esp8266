@@ -1,32 +1,25 @@
-//#include <ESP8266WiFi.h>
-//#include <ESP8266mDNS.h>
-//#include <WiFiClient.h>
-//#include <ESP8266WebServer.h>
 #include "store.h"
 #include "system.h"
 #include "user.h"
 #include "utils.h"
 #include "_esp.h"
 #include "network.h"
-
-//Store store;
+#include "web.h"
 
 void setup() {
   system_init();
   config_init();
+  web_init();
   network_init();
-  
-  
-
-
-
+  tcp_init();
+  check_tcp_alive();
 }
 
 void loop() {
-
-
+  http_handle();
+  check_tcp_alive();
+  
 }
-
 
 
 

@@ -22,4 +22,14 @@ void config_init(); // 新设备初始化
 
 char* getWlanPassword();
 char* getWlanSSID();
+void setWlanSSID(char *src);
+void setWlanPassword(char *src);
+
+char* getHost();
+char* getPort();
+void setHost(char *src);
+void setPort(char *src);
+
+void lock();
+void unlock();
 #endif
