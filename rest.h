@@ -11,5 +11,6 @@ void handleRoot();
 void handleNotFound();
 void handleWlan();
 void handleHost();
+void handleIOT();
 
 #endif

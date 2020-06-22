@@ -1,3 +1,4 @@
+#include <ArduinoJson.h>
 #include "store.h"
 #include "system.h"
 #include "user.h"
@@ -6,20 +7,39 @@
 #include "network.h"
 #include "web.h"
 
+#include "tcp.h"
+
+
+const char *input = "{\"sensor\":\"gps\"}";
+
 void setup() {
   system_init();
   config_init();
   web_init();
   network_init();
-  tcp_init();
-  check_tcp_alive();
+  
+  DynamicJsonDocument doc(1024);
+  deserializeJson(doc, input);
+  const char * sensor = doc["sensor"];
+  Serial.println(sensor);
+
 }
 
 void loop() {
   http_handle();
-  check_tcp_alive();
-  
+  tcp_golang->check_tcp_alive();
+  tcp_bigiot->check_tcp_alive();
+//  delay(5000);
+//  tcp_golang->tcp_send("\x22\x32");
+//
+//  delay(5000);
+//  tcp_golang->tcp_send_r("\x22\x34");
+//
+//  delay(5000);
+//  tcp_golang->tcp_send_r((char *)input);
 }
+
+
 
 
 

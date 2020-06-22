@@ -10,16 +10,24 @@
 
 Store store;
 /**
- * 设备初始化Flash
- */
+   设备初始化Flash
+*/
 void config_init() {
   Store s;
-  char * port = uint16_t2pchar(DEFAULT_TCP_PORT);
-  s.set(FLASH_SSID, DEFAULT_WLAN_SSID);
-  s.set(FLASH_PASSWORD, DEFAULT_WLAN_PASSWORD);
-  s.set(FLASH_TCP_HOST, DEFAULT_TCP_HOST);
-  s.set(FLASH_TCP_PORT, port);
-  free(port);
+  // unlock();
+  if (!s.isWriteProtect()) {
+    char * port = uint16_t2pchar(DEFAULT_TCP_PORT);
+    char * port2 = uint16_t2pchar(DEFAULT_TCP_IOT_PORT);
+    s.set(FLASH_SSID, DEFAULT_WLAN_SSID);
+    s.set(FLASH_PASSWORD, DEFAULT_WLAN_PASSWORD);
+    s.set(FLASH_TCP_HOST, DEFAULT_TCP_HOST);
+    s.set(FLASH_TCP_PORT, port);
+    s.set(FLASH_TCP_IOT_HOST, DEFAULT_TCP_IOT_HOST);
+    s.set(FLASH_TCP_IOT_PORT, port2);
+    free(port);
+    free(port2);
+    lock();
+  }
 }
 
 char* getWlanPassword() {
@@ -60,4 +68,20 @@ void setHost(char *src) {
 
 void setPort(char *src) {
   store.set(FLASH_TCP_PORT, src);
+}
+
+char* getIOTHost() {
+  return store.get(FLASH_TCP_IOT_HOST);
+}
+
+char *getIOTPort() {
+  return store.get(FLASH_TCP_IOT_PORT);
+}
+
+void setIOTHost(char *src) {
+  store.set(FLASH_TCP_IOT_HOST, src);
+}
+
+void setIOTPort(char *src) {
+  store.set(FLASH_TCP_IOT_PORT, src);
 }

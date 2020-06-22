@@ -11,8 +11,8 @@
 ESP8266WebServer server(80);
 
 /**
- * web server
- */
+   web server
+*/
 void web_init() {
   if (MDNS.begin("esp8266")) {
   }
@@ -20,6 +20,7 @@ void web_init() {
   server.onNotFound(handleNotFound);
   server.on("/changeWlan", handleWlan); // 修改 WLAN 的 SSID 和 PASSWORD
   server.on("/changeHost", handleHost); // 修改 后台服务器访问地址
+  server.on("/changeIOT", handleIOT); // 物联网专用通道
   server.begin();
 }
 

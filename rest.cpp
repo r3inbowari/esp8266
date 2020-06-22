@@ -11,6 +11,8 @@
 #include "user.h"
 #include "network.h"
 
+char convertPort[2];
+
 /**
    Home
 */
@@ -72,7 +74,7 @@ void handleHost() {
       __port += (a[i] - '0') * (uint16_t)pow(10, j++);
     }
     // 套接字中port的处理方法(uint16_t2char*)
-    char *convertPort = (char*)malloc(2);
+//    char *convertPort = (char*)malloc(2);
     // 低八位
     convertPort[0] = __port & 0xFF;
     // 高八位
@@ -82,10 +84,45 @@ void handleHost() {
     setHost((char*)arg0.c_str());
     setPort(convertPort);
     lock();
-    free(convertPort);
 
-    resetTCP((char*)arg0.c_str(), __port);
+    tcp_golang->resetTCP(getHost, getPort);
+
+    server.send(200, "text/plain", "host params: " + arg0 + ", " + arg1);
+  } else {
+    server.send(200, "text/plain", "error or less query params.");
+  }
+}
+
+
+/**
+   TCP IOT Host 修改
+   @rest ip:port/changeIOT?host=[host]&port=[port]
+*/
+void handleIOT() {
+  if (server.hasArg("host") && server.hasArg("port")) {
+    String arg0 = server.arg("host");
+    String arg1 = server.arg("port");
+
+    char *a = (char*)arg1.c_str();
+    uint16_t __port = 0;
+    double j = 0;
+    for (int i = strlen(a) - 1; i >= 0; i--) {
+      __port += (a[i] - '0') * (uint16_t)pow(10, j++);
+    }
+    // 套接字中port的处理方法(uint16_t2char*)
     
+    // 低八位
+    convertPort[0] = __port & 0xFF;
+    // 高八位
+    convertPort[1] = __port >> 8;
+
+    unlock();
+    setIOTHost((char*)arg0.c_str());
+    setIOTPort(convertPort);
+    lock();
+
+    tcp_bigiot->resetTCP(getIOTHost, getIOTPort);
+
     server.send(200, "text/plain", "host params: " + arg0 + ", " + arg1);
   } else {
     server.send(200, "text/plain", "error or less query params.");
