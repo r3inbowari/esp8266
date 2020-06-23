@@ -39,7 +39,7 @@
    AP-Config
 */
 #define DEFAULT_WLAN_SSID "r3inbowari"
-#define DEFAULT_WLAN_PASSWORD "15946395951"
+#define DEFAULT_WLAN_PASSWORD "100077646"
 
 /**
    自定义host2
