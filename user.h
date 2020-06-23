@@ -52,7 +52,7 @@
    物联网id与appid
 */
 #define DEFAULT_IOT_ID "18534"
-#define DEFAULT_IOT_APPID "aaaaaaaaa"
+#define DEFAULT_IOT_APPID "a06527c61"
 
 /**
    米家智能

@@ -100,6 +100,8 @@ void BigIOT::Handler() {
 
   if (CONTENT == BIGIOT_STOP) {
     Serial.println("\xa1\xf1\x83\x55\x90");
+    delay(20);
+    Serial.println("\xa1\xf1\x83\x55\x90");
     return;
   }
 

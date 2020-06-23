@@ -1,4 +1,5 @@
 #include <ArduinoJson.h>
+#include <ArduinoOTA.h>
 #include "store.h"
 #include "system.h"
 #include "user.h"
@@ -18,14 +19,29 @@ void setup() {
   web_init();
   network_init();
 
-  DynamicJsonDocument doc(1024);
-  deserializeJson(doc, input);
-  const char * sensor = doc["sensor"];
-  Serial.println(sensor);
 
+  ArduinoOTA.onStart([]() {
+    Serial.println("Start");
+  });
+  ArduinoOTA.onEnd([]() {
+    Serial.println("\nEnd");
+  });
+  ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
+    Serial.printf("Progress: %u%%\r", (progress / (total / 100)));
+  });
+  ArduinoOTA.onError([](ota_error_t error) {
+    Serial.printf("Error[%u]: ", error);
+    if (error == OTA_AUTH_ERROR) Serial.println("Auth Failed");
+    else if (error == OTA_BEGIN_ERROR) Serial.println("Begin Failed");
+    else if (error == OTA_CONNECT_ERROR) Serial.println("Connect Failed");
+    else if (error == OTA_RECEIVE_ERROR) Serial.println("Receive Failed");
+    else if (error == OTA_END_ERROR) Serial.println("End Failed");
+  });
+  ArduinoOTA.begin();
 }
 
 void loop() {
+  ArduinoOTA.handle();
   http_handle();
   tcp_golang->Handler();
   tcp_bigiot->Handler();
