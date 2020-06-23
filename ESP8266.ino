@@ -43,7 +43,7 @@ void setup() {
 void loop() {
   ArduinoOTA.handle();
   http_handle();
-  tcp_golang->Handler();
+  // tcp_golang->Handler();
   tcp_bigiot->Handler();
 }
 

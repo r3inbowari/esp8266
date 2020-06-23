@@ -21,7 +21,7 @@ void network_init() {
   char *password = getWlanPassword();
   connect_wifi(ssid, password);
 
-  tcp_golang = new ESPTCP(getHost, getPort);
+  // tcp_golang = new ESPTCP(getHost, getPort);
   tcp_bigiot = new BigIOT(getIOTHost, getIOTPort);
 }
 
