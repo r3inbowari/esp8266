@@ -15,6 +15,8 @@
    @addr 100-109 port1 tcp端口1, 实际上只占用2个字节
    @addr 110-142 host2 tcp地址2
    @addr 143-152 port2 tcp端口2
+   @addr 153-169 device_id 设备id
+   @addr 170-186 device_appid 设备appid
    当 addr 0 为 255 时, 进行第一次写入, 否正不再自动写入!
 */
 #define FLASH_SSID 1
@@ -23,6 +25,8 @@
 #define FLASH_TCP_PORT 100
 #define FLASH_TCP_IOT_HOST 110
 #define FLASH_TCP_IOT_PORT 143
+#define FLASH_IOT_ID 153
+#define FLASH_IOT_APPID 170
 
 /**
    自定义host1
@@ -45,6 +49,12 @@
 #define DEFAULT_TCP_IOT_HOST "bigiot.net"
 
 /**
+   物联网id与appid
+*/
+#define DEFAULT_IOT_ID "18534"
+#define DEFAULT_IOT_APPID "aaaaaaaaa"
+
+/**
    米家智能
 */
 
@@ -64,6 +74,11 @@ char* getIOTHost();
 char* getIOTPort();
 void setIOTHost(char *src);
 void setIOTPort(char *src);
+
+char* getIOTID();
+char* getIOTAppID();
+void setIOTID(char *src);
+void setIOTAppID(char *src);
 
 void lock();
 void unlock();

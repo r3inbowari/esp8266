@@ -12,5 +12,6 @@ void handleNotFound();
 void handleWlan();
 void handleHost();
 void handleIOT();
+void handleIOTAuth();
 
 #endif

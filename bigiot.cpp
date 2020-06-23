@@ -9,7 +9,8 @@
 #include "bigiot.h"
 
 BigIOT::BigIOT(pGetter phost, pGetter pport) : ESPTCP(phost, pport) {
-
+  deviceid = getIOTID();
+  appid = getIOTAppID();
 }
 
 void BigIOT::Login() {
@@ -78,7 +79,11 @@ void BigIOT::Handler() {
 
   if (MSG == "WELCOME TO BIGIOT") {
     Serial.println("send ok");
-    client.print(SEND_LOGIN);
+    client.print(LOGIN_CS1);
+    client.print(deviceid);
+    client.print(LOGIN_CS2);
+    client.print(appid);
+    client.print(LOGIN_CS3);
     return;
   }
 

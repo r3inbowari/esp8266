@@ -24,6 +24,8 @@ void config_init() {
     s.set(FLASH_TCP_PORT, port);
     s.set(FLASH_TCP_IOT_HOST, DEFAULT_TCP_IOT_HOST);
     s.set(FLASH_TCP_IOT_PORT, port2);
+    s.set(FLASH_IOT_ID, DEFAULT_IOT_ID);
+    s.set(FLASH_IOT_APPID, DEFAULT_IOT_APPID);
     free(port);
     free(port2);
     lock();
@@ -84,4 +86,21 @@ void setIOTHost(char *src) {
 
 void setIOTPort(char *src) {
   store.set(FLASH_TCP_IOT_PORT, src);
+}
+
+// ============================ BIG IOT ============================
+char* getIOTID() {
+  return store.get(FLASH_IOT_ID);
+}
+
+char *getIOTAppID() {
+  return store.get(FLASH_IOT_APPID);
+}
+
+void setIOTID(char *src) {
+  store.set(FLASH_IOT_ID, src);
+}
+
+void setIOTAppID(char *src) {
+  store.set(FLASH_IOT_APPID, src);
 }

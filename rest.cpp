@@ -39,6 +39,24 @@ void handleNotFound() {
 }
 
 /**
+   物联网权限配置
+   @rest ip:port/changeAuth?id=[id]&appid=[appid]
+*/
+void handleIOTAuth() {
+  if (server.hasArg("id") && server.hasArg("appid")) {
+    String arg0 = server.arg("id");
+    String arg1 = server.arg("appid");
+    unlock();
+    setIOTID((char*)arg0.c_str());
+    setIOTAppID((char*)arg1.c_str());
+    lock();
+    server.send(200, "text/plain", "auth params: " + arg0 + ", " + arg1);
+  } else {
+    server.send(200, "text/plain", "error or less query params.");
+  }
+}
+
+/**
    WLAN修改
    @rest ip:port/changeWlan?ssid=[ssid]&password=[password]
 */
@@ -74,7 +92,7 @@ void handleHost() {
       __port += (a[i] - '0') * (uint16_t)pow(10, j++);
     }
     // 套接字中port的处理方法(uint16_t2char*)
-//    char *convertPort = (char*)malloc(2);
+    //    char *convertPort = (char*)malloc(2);
     // 低八位
     convertPort[0] = __port & 0xFF;
     // 高八位
@@ -110,7 +128,7 @@ void handleIOT() {
       __port += (a[i] - '0') * (uint16_t)pow(10, j++);
     }
     // 套接字中port的处理方法(uint16_t2char*)
-    
+
     // 低八位
     convertPort[0] = __port & 0xFF;
     // 高八位
@@ -123,7 +141,7 @@ void handleIOT() {
 
     tcp_bigiot->resetTCP(getIOTHost, getIOTPort);
 
-    server.send(200, "text/plain", "host params: " + arg0 + ", " + arg1);
+    server.send(200, "text/plain", "iot host params: " + arg0 + ", " + arg1);
   } else {
     server.send(200, "text/plain", "error or less query params.");
   }
