@@ -8,7 +8,7 @@
 #include "web.h"
 
 #include "tcp.h"
-
+#include "bigiot.h"
 
 const char *input = "{\"sensor\":\"gps\"}";
 
@@ -17,7 +17,7 @@ void setup() {
   config_init();
   web_init();
   network_init();
-  
+
   DynamicJsonDocument doc(1024);
   deserializeJson(doc, input);
   const char * sensor = doc["sensor"];
@@ -27,16 +27,8 @@ void setup() {
 
 void loop() {
   http_handle();
-  tcp_golang->check_tcp_alive();
-  tcp_bigiot->check_tcp_alive();
-//  delay(5000);
-//  tcp_golang->tcp_send("\x22\x32");
-//
-//  delay(5000);
-//  tcp_golang->tcp_send_r("\x22\x34");
-//
-//  delay(5000);
-//  tcp_golang->tcp_send_r((char *)input);
+  tcp_golang->Handler();
+  tcp_bigiot->Handler();
 }
 
 

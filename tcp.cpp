@@ -18,7 +18,7 @@ ESPTCP::ESPTCP(pGetter phost, pGetter pport) {
   char *tempPortArr = pport();
   this->port = tempPortArr[0] | uint16_t(tempPortArr[1]) << 8;
   this->connect_tcp();
-  this->timeout = millis();
+  // this->timeout = millis();
 }
 
 /**
@@ -29,7 +29,7 @@ ESPTCP::ESPTCP() {
   char *tempPortArr = getPort();
   this->port = tempPortArr[0] | uint16_t(tempPortArr[1]) << 8;
   this->connect_tcp();
-  this->timeout = millis();
+  // this->timeout = millis();
 }
 
 /**
@@ -59,16 +59,19 @@ void ESPTCP::resetTCP(pGetter phost, pGetter pport) {
   // connect_tcp();
 }
 
-// static unsigned long timeout = millis();
-
 // 检查
-void ESPTCP::check_tcp_alive() {
-  // 记录最后一次超时时间
-  // static unsigned long timeout = millis();
-  if (millis() - timeout > TCP_CONNECT_TIMEOUT && !this->client.connected()) {
-    // 超时两分钟 && 断开, 更新timeout
-    timeout = millis();
-    connect_tcp();
+bool ESPTCP::is_alive() {
+  return this->client.connected();
+}
+
+// 重连
+void ESPTCP::Handler() {
+  static unsigned long timeout = millis();
+  if (!is_alive()) {
+    if (millis() - timeout > TCP_CONNECT_TIMEOUT) {
+      timeout = millis();
+      connect_tcp();
+    }
   }
 }
 
@@ -90,4 +93,11 @@ void ESPTCP::tcp_send_r(char *msg) {
     this->client.print(msg);
     this->client.print('\r');
   }
+}
+
+String ESPTCP::read() {
+  while (client.available()) {
+    return client.readStringUntil('\n');
+  }
+  return "";
 }

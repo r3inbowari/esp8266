@@ -7,12 +7,13 @@
 
 #include "network.h"
 
+
 WiFiClient client;
 char* host = "172.20.10.2";
 uint16_t port = 10086;
 
 ESPTCP *tcp_golang;
-ESPTCP *tcp_bigiot;
+BigIOT *tcp_bigiot;
 
 void network_init() {
   create_ap();
@@ -21,7 +22,7 @@ void network_init() {
   connect_wifi(ssid, password);
 
   tcp_golang = new ESPTCP(getHost, getPort);
-  tcp_bigiot = new ESPTCP(getIOTHost, getIOTPort);
+  tcp_bigiot = new BigIOT(getIOTHost, getIOTPort);
 }
 
 void connect_wifi(char * __ssid, char *__password) {

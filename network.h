@@ -11,11 +11,12 @@
 #include "user.h"
 #include "tcp.h"
 #include "utils.h"
+#include "bigiot.h"
 
 #define TCP_CONNECT_TIMEOUT 5000
 
 extern ESPTCP *tcp_golang;
-extern ESPTCP *tcp_bigiot;
+extern BigIOT *tcp_bigiot;
 
 void connect_wifi(char * __ssid, char *__password);
 void network_init();

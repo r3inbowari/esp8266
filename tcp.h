@@ -15,11 +15,11 @@
 typedef char* (*pGetter)();
 
 class ESPTCP {
-  private:
+  protected:
     char* host;
     uint16_t port;
     WiFiClient client;
-    unsigned long timeout;
+    // unsigned long timeout;
 
   public:
 
@@ -49,10 +49,13 @@ class ESPTCP {
 
     // 重设
     void resetTCP(pGetter phost, pGetter pport);
-    
-    // 检查
-    void check_tcp_alive();
 
+    // 检查tcp
+    bool is_alive();
+    
+    // 处理器
+    void Handler();
+    
     /**
       \r\n response end tag
     */
@@ -63,6 +66,9 @@ class ESPTCP {
        @see bigiot.net doc
     */
     void tcp_send_r(char *msg);
+
+    // read
+    String read();
 };
 
 
