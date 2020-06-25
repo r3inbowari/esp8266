@@ -47,6 +47,8 @@ ip:port/changeIOT?host=[host]&port=[port]
 ip:port/changeAuth?id=[id]&appid=[appid]
 ```
 
+### 待补充的内容...  
+
 ## 注意事项
 
 ### 1. AP模式下的默认网关为 `192.168.128.1`
