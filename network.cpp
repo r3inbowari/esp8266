@@ -16,12 +16,13 @@ ESPTCP *tcp_golang;
 BigIOT *tcp_bigiot;
 
 void network_init() {
-  create_ap();
+  WiFi.mode(WIFI_STA);
   char *ssid = getWlanSSID();
   char *password = getWlanPassword();
   connect_wifi(ssid, password);
+  create_ap();
 
-  // tcp_golang = new ESPTCP(getHost, getPort);
+  tcp_golang = new ESPTCP(getHost, getPort);
   tcp_bigiot = new BigIOT(getIOTHost, getIOTPort);
 }
 
@@ -36,6 +37,9 @@ void connect_wifi(char * __ssid, char *__password) {
       break;
     }
   }
+  Serial.print("connected to ");
+  Serial.print(__ssid);
+  Serial.print(" ip: ");
   Serial.println(WiFi.localIP());
 }
 

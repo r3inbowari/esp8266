@@ -13,5 +13,8 @@
 #include <ESP8266WebServer.h>
 #include <EEPROM.h>
 
+#include <ESP8266HTTPClient.h>
+#include <ESP8266httpUpdate.h>
+
 void system_init();
 #endif

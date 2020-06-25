@@ -23,6 +23,7 @@ class Store {
 
     bool set(int addr, char *str);
     char* get(int addr);
+    bool setPos(int addr, char *str, int len);
 
     // unit test
     void __test_protect_status();

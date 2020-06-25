@@ -7,6 +7,5 @@
 #ifndef __ESP_H
 #define __ESP_H
 
-extern Store store;
 
 #endif

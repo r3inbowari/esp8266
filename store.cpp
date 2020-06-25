@@ -40,6 +40,19 @@ char* Store::get(int addr) {
 bool Store::set(int addr, char *str) {
   if (!isWriteProtect()) {
     int len = strlen(str);
+    Serial.println(len, HEX);
+    EEPROM.write(addr++, len);
+    for (int i = 0; i < len; i++) {
+      EEPROM.write(addr++, str[i]);
+    }
+    EEPROM.commit();
+    return true;
+  }
+  return false;
+}
+
+bool Store::setPos(int addr, char *str, int len) {
+  if (!isWriteProtect()) {
     EEPROM.write(addr++, len);
     for (int i = 0; i < len; i++) {
       EEPROM.write(addr++, str[i]);

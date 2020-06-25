@@ -17,6 +17,7 @@
    @addr 143-152 port2 tcp端口2
    @addr 153-169 device_id 设备id
    @addr 170-186 device_appid 设备appid
+   @addr 256-259 software_version
    当 addr 0 为 255 时, 进行第一次写入, 否正不再自动写入!
 */
 #define FLASH_SSID 1
@@ -27,19 +28,26 @@
 #define FLASH_TCP_IOT_PORT 143
 #define FLASH_IOT_ID 153
 #define FLASH_IOT_APPID 170
+#define FLASH_DEVICE_VERSION 200
+
+/**
+ * 更新地址
+ */
+#define UPDATE_URL "http://r3inbowari.top:3000/druid_m0/"
+#define UPDATE_FILENAME "/ESP8266.ino.generic.bin"
 
 /**
    自定义host1
 */
-#define DEFAULT_TCP_PORT 1008
-#define DEFAULT_TCP_HOST "172.20.10.2"
+#define DEFAULT_TCP_PORT 10086
+#define DEFAULT_TCP_HOST "r3inbowari.top"
 
 
 /**
    AP-Config
 */
-#define DEFAULT_WLAN_SSID "r3inbowari"
-#define DEFAULT_WLAN_PASSWORD "15946395951"
+#define DEFAULT_WLAN_SSID "ZTE-D908"
+#define DEFAULT_WLAN_PASSWORD "12345678"
 
 /**
    自定义host2
@@ -52,7 +60,7 @@
    物联网id与appid
 */
 #define DEFAULT_IOT_ID "18534"
-#define DEFAULT_IOT_APPID "a06527c61"
+#define DEFAULT_IOT_APPID "a06527c6"//1
 
 /**
    米家智能
@@ -79,6 +87,9 @@ char* getIOTID();
 char* getIOTAppID();
 void setIOTID(char *src);
 void setIOTAppID(char *src);
+
+void setVersion(char *src);
+char* getVersion();
 
 void lock();
 void unlock();

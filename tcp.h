@@ -52,10 +52,10 @@ class ESPTCP {
 
     // 检查tcp
     bool is_alive();
-    
+
     // 处理器
     void Handler();
-    
+
     /**
       \r\n response end tag
     */
@@ -69,6 +69,10 @@ class ESPTCP {
 
     // read
     String read();
+
+    // 测试用
+    void dht_order_send(char *order);
+
 };
 
 

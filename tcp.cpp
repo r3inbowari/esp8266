@@ -5,6 +5,8 @@
 */
 
 #include "tcp.h"
+#include "_esp.h"
+#include "update.h"
 
 /**
    构造函数
@@ -71,6 +73,43 @@ void ESPTCP::Handler() {
     if (millis() - timeout > TCP_CONNECT_TIMEOUT) {
       timeout = millis();
       connect_tcp();
+    }
+  }
+
+
+  if (client.available()) {
+    char ch = static_cast<char>(client.read());
+    if (ch == 0xfa) { // 更新命令
+      char len = client.read();
+      char *result = (char*)malloc(len + 1);
+
+      for (int i = 0; i < len; i ++) {
+        result[i] = static_cast<char>(client.read());
+      }
+      *(result + len) = '\0';
+      check_update(result);
+    } else if (ch == 0xfe) { // DHT11 传感器示例
+      char len = client.read();
+      char *result = (char*)malloc(len + 1);
+      for (int i = 0; i < len; i ++) {
+        result[i] = static_cast<char>(client.read());
+      }
+      *(result + len) = '\0';
+      dht_order_send(result);
+    }
+  }
+}
+
+/**
+   传感器(测试用)
+*/
+void ESPTCP::dht_order_send(char *order) {
+  static String inputString = "";
+  if (order[0] == 0xbb) {
+    if (client.connected()) {
+      if (inputString.length() > 0) {
+        client.print(inputString);
+      }
     }
   }
 }

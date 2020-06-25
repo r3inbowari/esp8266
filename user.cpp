@@ -26,6 +26,8 @@ void config_init() {
     s.set(FLASH_TCP_IOT_PORT, port2);
     s.set(FLASH_IOT_ID, DEFAULT_IOT_ID);
     s.set(FLASH_IOT_APPID, DEFAULT_IOT_APPID);
+    char *a = "\x10\x00\x43";
+    s.setPos(FLASH_DEVICE_VERSION, a, 3);
     free(port);
     free(port2);
     lock();
@@ -103,4 +105,13 @@ void setIOTID(char *src) {
 
 void setIOTAppID(char *src) {
   store.set(FLASH_IOT_APPID, src);
+}
+
+// // ============================ update ============================
+void setVersion(char *src) {
+  store.set(FLASH_DEVICE_VERSION, src);
+}
+
+char* getVersion() {
+  return store.get(FLASH_DEVICE_VERSION);
 }
