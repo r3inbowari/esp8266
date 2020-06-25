@@ -42,7 +42,6 @@
 #define DEFAULT_TCP_PORT 10086
 #define DEFAULT_TCP_HOST "r3inbowari.top"
 
-
 /**
    AP-Config
 */
@@ -60,7 +59,7 @@
    物联网id与appid
 */
 #define DEFAULT_IOT_ID "18534"
-#define DEFAULT_IOT_APPID "a06527c6"//1
+#define DEFAULT_IOT_APPID "a06527c6" //1
 
 /**
    米家智能
@@ -68,28 +67,28 @@
 
 void config_init(); // 新设备初始化
 
-char* getWlanPassword();
-char* getWlanSSID();
+char *getWlanPassword();
+char *getWlanSSID();
 void setWlanSSID(char *src);
 void setWlanPassword(char *src);
 
-char* getHost();
-char* getPort();
+char *getHost();
+char *getPort();
 void setHost(char *src);
 void setPort(char *src);
 
-char* getIOTHost();
-char* getIOTPort();
+char *getIOTHost();
+char *getIOTPort();
 void setIOTHost(char *src);
 void setIOTPort(char *src);
 
-char* getIOTID();
-char* getIOTAppID();
+char *getIOTID();
+char *getIOTAppID();
 void setIOTID(char *src);
 void setIOTAppID(char *src);
 
 void setVersion(char *src);
-char* getVersion();
+char *getVersion();
 
 void lock();
 void unlock();
